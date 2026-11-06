@@ -1,9 +1,9 @@
 [build]
-builder = "nixpacks"
+builder = "docker"
 
 [deploy]
-startCommand = "npx serve -s . -l $PORT"
+startCommand = "npm start"
 healthcheckPath = "/presentacion.html"
-healthcheckTimeout = 100
+healthcheckTimeout = 120
 restartPolicyType = "always"
 restartPolicyMaxRetries = 10
