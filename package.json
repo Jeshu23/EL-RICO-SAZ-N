@@ -1,0 +1,11 @@
+{
+  "name": "el-rico-sazon",
+  "version": "1.0.0",
+  "description": "Restaurante El Rico Sazón - Landing page",
+  "scripts": {
+    "start": "serve -s . -l $PORT"
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
+}
