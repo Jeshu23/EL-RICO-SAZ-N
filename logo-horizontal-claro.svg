@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-labelledby="tituloH descH">
+  <title id="tituloH">El Rico Sazón — horizontal para fondo claro</title>
+  <desc id="descH">Logotipo horizontal para fondos claros: emblema circular y nombre del restaurante en tonos café y oro.</desc>
+
+  <defs>
+    <radialGradient id="fondo" cx="42%" cy="32%" r="82%">
+      <stop offset="0%"   stop-color="#3B2418"/>
+      <stop offset="55%"  stop-color="#26150E"/>
+      <stop offset="100%" stop-color="#150B06"/>
+    </radialGradient>
+
+    <linearGradient id="oro" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%"   stop-color="#F9E7AC"/>
+      <stop offset="35%"  stop-color="#DCB25C"/>
+      <stop offset="62%"  stop-color="#B9852E"/>
+      <stop offset="100%" stop-color="#F4D78C"/>
+    </linearGradient>
+
+    <linearGradient id="llama" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%"   stop-color="#C01B10"/>
+      <stop offset="45%"  stop-color="#E8461F"/>
+      <stop offset="100%" stop-color="#FFAE33"/>
+    </linearGradient>
+
+    <linearGradient id="llamaInterna" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%"   stop-color="#F7C548"/>
+      <stop offset="55%"  stop-color="#FFE7A8"/>
+      <stop offset="100%" stop-color="#FFF8E6"/>
+    </linearGradient>
+
+    <path id="formaLlama" d="M400 258
+      C413 297 437 312 442 346
+      C446 371 438 392 424 406
+      C426 378 418 364 407 354
+      C409 384 414 398 402 419
+      C392 437 369 439 357 418
+      C343 394 351 366 371 344
+      C385 328 395 312 395 292
+      C395 278 397 268 400 258 Z"/>
+
+    <g id="tenedor">
+      <rect x="-38" y="-152" width="10" height="96" rx="5"/>
+      <rect x="-14" y="-152" width="10" height="96" rx="5"/>
+      <rect x="10"  y="-152" width="10" height="96" rx="5"/>
+      <rect x="34"  y="-152" width="10" height="96" rx="5"/>
+      <path d="M-38 -70 H38 V-52 Q38 -34 22 -26 V-6 H-22 V-26 Q-38 -34 -38 -52 Z"/>
+      <rect x="-11" y="-10" width="22" height="165" rx="11"/>
+    </g>
+
+    <g id="cuchara">
+      <ellipse cx="0" cy="-112" rx="38" ry="52"/>
+      <rect x="-11" y="-62" width="22" height="217" rx="11"/>
+    </g>
+
+    <g id="marcaEmblema" transform="translate(400 400) scale(1.16) translate(-402.7 -386.1)">
+      <g fill="url(#oro)" transform="translate(400 390) rotate(-28) translate(-400 -390)">
+        <use href="#tenedor" xlink:href="#tenedor" x="400" y="390"/>
+      </g>
+      <g fill="url(#oro)" transform="translate(400 390) rotate(28) translate(-400 -390)">
+        <use href="#cuchara" xlink:href="#cuchara" x="400" y="390"/>
+      </g>
+      <use href="#formaLlama" xlink:href="#formaLlama" fill="url(#llama)"/>
+      <use href="#formaLlama" xlink:href="#formaLlama" fill="url(#llamaInterna)" opacity="0.95"
+           transform="translate(400 432) scale(0.52) translate(-400 -432)"/>
+    </g>
+  </defs>
+
+  <g id="icono">
+    <circle cx="320" cy="200" r="124" fill="url(#fondo)"/>
+    <circle cx="320" cy="200" r="121" fill="none" stroke="url(#oro)" stroke-width="4"/>
+    <circle cx="320" cy="200" r="111" fill="none" stroke="url(#oro)" stroke-width="1.2" opacity="0.45"/>
+    <use href="#marcaEmblema" xlink:href="#marcaEmblema" transform="translate(320 200) scale(0.56) translate(-400 -400)"/>
+  </g>
+
+  <g font-family="Georgia, 'Playfair Display', 'Times New Roman', serif" font-weight="700">
+    <text x="500" y="112" font-size="48" letter-spacing="16" fill="#A9741F">EL RICO</text>
+    <text x="500" y="242" font-size="132" fill="#2B1810">SAZÓN</text>
+    <path d="M500 276 H996" stroke="#B9852E" stroke-width="2" opacity="0.5"/>
+    <text x="500" y="326" font-size="29" letter-spacing="13" fill="#7A4A22">RESTAURANTE</text>
+  </g>
+</svg>

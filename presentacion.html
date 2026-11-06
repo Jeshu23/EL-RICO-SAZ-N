@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Rico Sazón — Restaurante</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="logo-800.png" sizes="800x800">
+  <style>
+    /* =====================================================================
+       EL RICO SAZÓN · Identidad visual mejorada
+       Espresso #1B100A · Oro sazón #D9AE56 · Brasa #E8461F · Crema #F7EFE2 · Nogal #6B3F22
+       ===================================================================== */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      width: 100vw;
+      min-height: 100vh;
+      background: #F7EFE2;
+      color: #2B1810;
+      font-family: Georgia, 'Times New Roman', serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Saltar al contenido */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0.5rem;
+      z-index: 100;
+      background: #D9AE56;
+      color: #1B100A;
+      padding: 0.4rem 0.8rem;
+      text-decoration: none;
+      font-family: Verdana, Geneva, sans-serif;
+      font-weight: 700;
+      border-radius: 4px;
+    }
+    .skip-link:focus { left: 0.5rem; }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(247,239,226,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(43,24,16,.10);
+    }
+    .header__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .header__brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .header__logo { width: 44px; height: 44px; display: block; }
+    .header__name-group { display: flex; flex-direction: column; line-height: 1.15; }
+    .header__name-group .eyebrow {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: #A9741F; margin: 0;
+    }
+    .header__name-group h1 {
+      margin: 0; font-size: 19px; line-height: 1; font-weight: 700;
+      color: #2B1810; letter-spacing: 2px;
+    }
+    .header__name-group .sub {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase;
+      color: #6B4A33; margin: 0;
+    }
+
+    .nav__list {
+      display: flex; gap: 24px; list-style: none; margin: 0; padding: 0;
+      align-items: center;
+    }
+    .nav__link {
+      text-decoration: none;
+      color: #2B1810;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 14px; font-weight: 700;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color .2s;
+    }
+    .nav__link:hover, .nav__link:focus-visible { border-bottom-color: #E8461F; outline: 2px solid #D9AE56; outline-offset: 2px; border-radius: 2px; }
+    .nav__link[aria-current="page"] { color: #E8461F; border-bottom-color: #E8461F; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      text-decoration: none;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 700; font-size: 14px;
+      padding: 0.55rem 1rem; border-radius: 6px; border: 0; cursor: pointer;
+    }
+    .btn--primary { background: #E8461F; color: #fff; box-shadow: 0 4px 12px rgba(232,70,31,.35); }
+    .btn--primary:hover { background: #c63517; transform: translateY(-1px); }
+    .btn--ghost { background: transparent; color: #2B1810; border: 1px solid rgba(43,24,16,.35); }
+    .btn--ghost:hover { background: rgba(43,24,16,.08); }
+    .btn--outline { background: transparent; color: #2B1810; border: 1px solid rgba(43,24,16,.35); }
+    .btn--outline:hover { background: rgba(43,24,16,.08); }
+
+    /* Menú móvil (hamburguesa) */
+    .nav-toggle {
+      display: inline-grid; place-items: center;
+      width: 44px; height: 44px; padding: 0;
+      background: transparent; border: 1px solid rgba(43,24,16,.35);
+      border-radius: 6px; cursor: pointer;
+      color: #2B1810;
+    }
+    .nav-toggle__bars { display: grid; gap: 4px; width: 20px; }
+    .nav-toggle__bars span { display: block; height: 2px; width: 100%; border-radius: 2px; background: currentColor; transition: transform .25s, opacity .25s; }
+    .nav-toggle[aria-expanded="true"] .nav-toggle__bars span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] .nav-toggle__bars span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] .nav-toggle__bars span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    @media (min-width: 64rem) {
+      .nav-toggle { display: none; }
+      nav { display: block; }
+    }
+
+    /* ---------- Hero con fondo especial ---------- */
+    .hero {
+      padding: 5rem 1rem 6rem;
+      position: relative;
+      overflow: hidden;
+      background: #F7EFE2;
+    }
+    .hero__bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(rgba(27,16,10,.62), rgba(27,16,10,.52)), url('assets/img/fondo-hero.jpg');
+      background-size: cover; background-position: center;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 300px;
+      background-image: radial-gradient(circle, rgba(232,70,31,.18), transparent 70%);
+      z-index: 0; pointer-events: none;
+    }
+    .hero__content { position: relative; z-index: 2; max-width: 880px; margin: 0 auto; text-align: center; }
+    .hero__kicker {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 11px; letter-spacing: 7px; text-transform: uppercase;
+      color: #D9AE56; margin: 0 0 0.85rem; font-weight: 700;
+    }
+    .hero h2 {
+      font-size: clamp(2.6rem, 7vw, 3.8rem); line-height: 1.02; margin: 0 0 1rem; color: #fff; font-weight: 800; letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.35);
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.35rem); color: #F7EFE2; margin: 0 0 2.25rem; max-width: 62ch; margin-left: auto; margin-right: auto; text-shadow: 0 1px 4px rgba(0,0,0,.4);
+    }
+    .hero__actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ---------- Horno / Brasa (especialidad) ---------- */
+    .horno { padding: 5rem 1rem 6rem; background: #FBF7EF; position: relative; overflow: hidden; }
+    .horno__bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(rgba(247,239,226,.92), rgba(247,239,226,.85)), url('assets/img/fondo-chef.jpg');
+      background-size: cover; background-position: center;
+    }
+    .horno__deco {
+      position: absolute; top: -80px; right: -60px; width: 500px; height: 420px;
+      background-image: radial-gradient(circle at 30% 40%, rgba(232,70,31,.16), transparent 60%);
+      z-index: 0; pointer-events: none; border-radius: 50%;
+    }
+    .horno__grid {
+      max-width: 1100px; margin: 0 auto; position: relative; z-index: 2;
+      display: grid; gap: 3rem; align-items: center;
+    }
+    @media (min-width: 64rem) { .horno__grid { grid-template-columns: 1fr 1.05fr; } }
+    .horno__media {
+      position: relative; aspect-ratio: 1; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 24px 60px rgba(43,24,16,.18);
+      border: 4px solid #fff;
+    }
+    .horno__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .horno__media::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.35), transparent 45%);
+      z-index: 1;
+    }
+    .horno__badge {
+      position: absolute; bottom: 1rem; left: 1rem; z-index: 2;
+      background: #E8461F; color: #fff; font-family: Verdana, Geneva, sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+      padding: 0.5rem 1rem; border-radius: 50px; box-shadow: 0 4px 12px rgba(232,70,31,.45);
+    }
+    .horno__content h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0 0 0.85rem; color: #1B100A; font-weight: 800; letter-spacing: 0.5px;
+    }
+    .horno__content p { color: #4A3428; margin: 0 0 1.25rem; font-size: 1.05rem; line-height: 1.7; }
+    .horno__list { list-style: none; margin: 0 0 1.75rem; padding: 0; color: #4A3428; }
+    .horno__list li { margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.8rem; font-size: 1rem; }
+    .horno__list li::before {
+      content: "⎯"; color: #E8461F; font-weight: 900; font-size: 1.4rem; flex: 0 0 auto;
+    }
+
+    /* ---------- Carta ---------- */
+    .carta { padding: 4rem 1rem 6rem; background: #F7EFE2; position: relative; }
+    .carta__deco {
+      position: absolute; top: -100px; left: -10%; width: 600px; height: 500px;
+      background-image: radial-gradient(circle, rgba(232,70,31,.08), transparent 60%);
+      z-index: 0; pointer-events: none; border-radius: 50%;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; position: relative; z-index: 2; }
+    .section-head { text-align: center; margin-bottom: 3rem; }
+    .section-head .kicker {
+      font-family: Verdana, Geneva, sans-serif; font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+      color: #A9741F; margin: 0 0 0.5rem; font-weight: 700;
+    }
+    .section-head h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin: 0 0 0.75rem; color: #1B100A; font-weight: 800; letter-spacing: 1px; }
+    .section-head p { color: #4A3428; max-width: 56ch; margin: 0 auto; }
+
+    .carta__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.75rem;
+    }
+    .card {
+      background: #fff; border: 1px solid rgba(43,24,16,.10);
+      border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .card:hover, .card:focus-within {
+      transform: translateY(-6px);
+      border-color: rgba(232,70,31,.35);
+      box-shadow: 0 20px 44px rgba(43,24,16,.16);
+    }
+    .card__media {
+      position: relative;
+      height: 220px;
+      background: #EDE0CB;
+      overflow: hidden;
+    }
+    .card__media img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .5s ease;
+    }
+    .card:hover .card__media img { transform: scale(1.06); }
+    .card__media::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,.16));
+    }
+    .card__badge {
+      position: absolute; top: 0.8rem; left: 0.8rem;
+      background: #E8461F; color: #fff; font-family: Verdana, Geneva, sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 0.25rem 0.65rem; border-radius: 50px; box-shadow: 0 2px 6px rgba(232,70,31,.35);
+      z-index: 2;
+    }
+    .card__body { padding: 1.35rem 1.35rem 1.45rem; flex: 1; display: flex; flex-direction: column; }
+    .card__title { font-size: 1.15rem; margin: 0 0 0.35rem; color: #1B100A; font-weight: 700; letter-spacing: 0.3px; }
+    .card__desc { font-size: 0.9rem; color: #4A3428; margin: 0 0 0.9rem; line-height: 1.55; flex: 1; }
+    .card__footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 0.5rem; border-top: 1px solid rgba(43,24,16,.08); }
+    .card__price { font-size: 1.3rem; font-weight: 700; color: #E8461F; letter-spacing: 0.5px; }
+    .card__price span { font-size: 0.85rem; font-weight: 400; color: #6B4A33; }
+
+    /* ---------- Nosotros ---------- */
+    .nosotros { padding: 4rem 1rem 5rem; background: #FBF7EF; position: relative; overflow: hidden; }
+    .nosotros__deco {
+      position: absolute; top: 0; right: -8%; width: 500px; height: 420px;
+      background-image: radial-gradient(circle at 70% 30%, rgba(107,63,34,.10), transparent 55%);
+      z-index: 0; pointer-events: none; border-radius: 50%;
+    }
+    .nosotros__grid { max-width: 1000px; margin: 0 auto; display: grid; gap: 3rem; align-items: center; position: relative; z-index: 2; }
+    @media (min-width: 64rem) { .nosotros__grid { grid-template-columns: 1fr 1fr; } }
+    .nosotros__media { aspect-ratio: 4/3; background: #EDE0CB; border-radius: 16px; overflow: hidden; box-shadow: 0 16px 40px rgba(43,24,16,.12); }
+    .nosotros__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .nosotros h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 0 0 0.9rem; color: #1B100A; font-weight: 800; letter-spacing: 0.5px; }
+    .nosotros p { color: #4A3428; margin: 0 0 1rem; }
+    .nosotros ul { color: #4A3428; padding-left: 1.2rem; margin: 0 0 1rem; }
+    .nosotros li { margin-bottom: 0.45rem; }
+
+    /* ---------- Reservas con carrito ---------- */
+    .reservas { padding: 4rem 1rem 5rem; background: #F7EFE2; position: relative; }
+    .reservas__deco {
+      position: absolute; bottom: -60px; left: -8%; width: 600px; height: 420px;
+      background-image: radial-gradient(circle at 40% 60%, rgba(232,70,31,.09), transparent 60%);
+      z-index: 0; pointer-events: none; border-radius: 50%;
+    }
+    .reservas__grid {
+      max-width: 1100px; margin: 0 auto; display: grid; gap: 2.5rem;
+      position: relative; z-index: 2;
+    }
+    @media (min-width: 64rem) {
+      .reservas__grid { grid-template-columns: 1fr 1.15fr; }
+    }
+    .reservas__info h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin: 0 0 0.9rem; color: #1B100A; font-weight: 800; letter-spacing: 1px; }
+    .reservas__info p { color: #4A3428; margin: 0 0 1.5rem; }
+
+    .reserva__detalle {
+      background: #fff; border: 1px solid rgba(43,24,16,.12);
+      border-radius: 16px; padding: 1.75rem; box-shadow: 0 10px 30px rgba(43,24,16,.08);
+    }
+    .reserva__detalle h3 { margin: 0 0 1.25rem; font-size: 1.35rem; color: #1B100A; font-weight: 800; letter-spacing: 0.5px; }
+    .reserva__detalle p { margin: 0 0 1rem; color: #4A3428; font-size: 0.95rem; }
+    .reserva__detalle ul { list-style: none; margin: 0 0 1.5rem; padding: 0; color: #4A3428; }
+    .reserva__detalle li { margin-bottom: 0.55rem; display: flex; align-items: flex-start; gap: 0.7rem; }
+    .reserva__detalle li strong { color: #1B100A; min-width: 110px; }
+    .reserva__detalle .detalle__icon {
+      flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%;
+      background: #EDE0CB; color: #E8461F; display: grid; place-items: center; font-size: 1.1rem;
+    }
+
+    .form { background: #fff; border: 1px solid rgba(43,24,16,.12); border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(43,24,16,.08); }
+    .form__head { margin-bottom: 1.5rem; }
+    .form__head .kicker {
+      font-family: Verdana, Geneva, sans-serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+      color: #A9741F; margin: 0 0 0.4rem; font-weight: 700;
+    }
+    .form__head h3 { margin: 0; font-size: 1.4rem; color: #1B100A; font-weight: 800; letter-spacing: 0.5px; }
+    .form label { display: block; font-family: Verdana, Geneva, sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #6B4A33; margin-bottom: 0.4rem; font-weight: 700; }
+    .form input, .form textarea, .form select {
+      width: 100%; padding: 0.7rem 0.85rem; font-family: Georgia, 'Times New Roman', serif; font-size: 1rem;
+      border: 1px solid rgba(43,24,16,.35); border-radius: 8px; background: #fff; color: #2B1810;
+    }
+    .form input:focus, .form textarea:focus, .form select:focus { outline: 2px solid #D9AE56; border-color: transparent; }
+    .form .field { margin-bottom: 1.1rem; }
+    .form .field__error { color: #E8461F; font-size: 0.85rem; margin-top: 0.35rem; }
+    .form .row { display: grid; gap: 1rem; }
+    @media (min-width: 40rem) { .form .row { grid-template-columns: 1fr 1fr; } }
+    .form .field--full { grid-column: 1 / -1; }
+
+    .form__actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+    .form__actions .btn { flex: 1 1 0; justify-content: center; }
+
+    /* ---------- Carrito de reservas flotante ---------- */
+    .reserva-cart {
+      position: fixed;
+      inset: 0 0 0 auto;
+      z-index: 100;
+      width: min(100%, 28rem);
+      height: 100vh;
+      max-height: 100dvh;
+      border-left: 1px solid rgba(43,24,16,.12);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateX(100%);
+      transition: transform .35s ease;
+      will-change: transform;
+    }
+    body.reserva-cart-open .reserva-cart { transform: translateX(0); }
+    body.reserva-cart-open { overflow: hidden; }
+
+    .reserva-cart__overlay {
+      position: fixed; inset: 0; z-index: 99;
+      background: rgba(27,16,10,.45);
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+    }
+    body.reserva-cart-open .reserva-cart__overlay { opacity: 1; pointer-events: auto; }
+
+    .reserva-cart__header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 1.25rem; border-bottom: 1px solid rgba(43,24,16,.12);
+      background: #fff;
+    }
+    .reserva-cart__header h3 {
+      margin: 0; font-size: 1.25rem; color: #1B100A; font-weight: 800; letter-spacing: 0.5px;
+    }
+    .reserva-cart__close {
+      width: 40px; height: 40px; display: grid; place-items: center;
+      background: transparent; border: 1px solid rgba(43,24,16,.35);
+      border-radius: 8px; cursor: pointer; color: #2B1810;
+    }
+    .reserva-cart__close:hover { background: rgba(43,24,16,.08); }
+
+    .reserva-cart__body { flex: 1; overflow-y: auto; padding: 1.5rem; background: #FBF7EF; }
+
+    .reserva-cart__empty {
+      text-align: center; padding: 3rem 1rem; color: #6B4A33;
+    }
+    .reserva-cart__empty .icon { font-size: 3rem; margin-bottom: 1rem; display: block; opacity: .5; }
+    .reserva-cart__empty h4 { margin: 0 0 0.5rem; font-size: 1.2rem; color: #1B100A; }
+    .reserva-cart__empty p { margin: 0; font-size: 0.95rem; }
+
+    .reserva-cart__item {
+      background: #fff; border: 1px solid rgba(43,24,16,.10);
+      border-radius: 12px; padding: 1rem; margin-bottom: 1rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .reserva-cart__item h4 { margin: 0; font-size: 1rem; color: #1B100A; font-weight: 800; }
+    .reserva-cart__item p { margin: 0; font-size: 0.9rem; color: #4A3428; }
+    .reserva-cart__item .tag {
+      display: inline-block; font-family: Verdana, Geneva, sans-serif;
+      font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+      color: #E8461F; font-weight: 700; border: 1px solid rgba(232,70,31,.3);
+      padding: 0.15rem 0.5rem; border-radius: 50px; margin-top: 0.2rem;
+    }
+
+    .reserva-cart__footer {
+      padding: 1.25rem; border-top: 1px solid rgba(43,24,16,.12);
+      background: #fff; display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .reserva-cart__total {
+      display: flex; justify-content: space-between; font-size: 1.1rem;
+      font-weight: 800; color: #1B100A; padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(43,24,16,.08);
+    }
+    .reserva-cart__total span { color: #6B4A33; font-weight: 500; }
+
+    .btn--cart-block {
+      width: 100%; padding: 0.85rem; border-radius: 10px; font-size: 1rem;
+      justify-content: center;
+    }
+
+    /* Botón flotante del carrito */
+    .cart-fab {
+      position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 90;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #E8461F; color: #fff; border: 0; cursor: pointer;
+      display: grid; place-items: center; font-size: 1.5rem;
+      box-shadow: 0 8px 24px rgba(232,70,31,.45);
+      transition: transform .2s, background .2s;
+    }
+    .cart-fab:hover { background: #c63517; transform: translateY(-2px) scale(1.05); }
+    .cart-fab .badge {
+      position: absolute; top: -6px; right: -6px; width: 20px; height: 20px;
+      background: #1B100A; color: #fff; border-radius: 50%;
+      font-size: 10px; font-weight: 800; display: grid; place-items: center;
+    }
+
+    /* ---------- Contacto ---------- */
+    .contacto { padding: 4rem 1rem 5rem; background: #FBF7EF; }
+    .contacto__grid { max-width: 1000px; margin: 0 auto; display: grid; gap: 2rem; position: relative; z-index: 2; }
+    @media (min-width: 64rem) { .contacto__grid { grid-template-columns: 1fr 1fr; } }
+    .contacto h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin: 0 0 0.9rem; color: #1B100A; font-weight: 800; letter-spacing: 1px; }
+    .contacto p { color: #4A3428; margin: 0 0 1.5rem; }
+    .contact__card {
+      background: #fff; border: 1px solid rgba(43,24,16,.12);
+      border-radius: 12px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .contact__icon { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 10px; background: #EDE0CB; color: #E8461F; display: grid; place-items: center; font-size: 1.25rem; }
+    .contact__body h4 { margin: 0 0 0.25rem; font-size: 1rem; color: #1B100A; font-weight: 800; }
+    .contact__body p { margin: 0; color: #4A3428; font-size: 0.95rem; }
+    .contact__body a { color: #E8461F; text-decoration: none; font-weight: 800; }
+    .contact__body a:hover { text-decoration: underline; }
+
+    /* Detalles decorativos con imagen */
+    .detalle__galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .detalle__item {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #EDE0CB;
+      box-shadow: 0 8px 20px rgba(43,24,16,.10);
+    }
+    .detalle__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+    .detalle__item:hover img { transform: scale(1.1); }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      border-top: 1px solid rgba(43,24,16,.12);
+      background: #1B100A; color: #F7EFE2; padding: 4rem 1rem 2.5rem;
+    }
+    .footer__inner { max-width: 1100px; margin: 0 auto; padding: 0 1rem; display: grid; gap: 2rem; }
+    @media (min-width: 64rem) { .footer__inner { grid-template-columns: 1fr 1fr 1fr; } }
+    .footer__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .footer__logo { width: 38px; height: 38px; display: block; }
+    .footer__name-group { line-height: 1.15; }
+    .footer__name-group .eyebrow {
+      font-family: Verdana, Geneva, sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #D9AE56; margin: 0;
+    }
+    .footer__name-group h2 { margin: 0; font-size: 18px; font-weight: 800; color: #F7EFE2; letter-spacing: 1px; }
+    .footer__name-group p { margin: 0; font-family: Verdana, Geneva, sans-serif; font-size: 10px; color: rgba(247,239,226,.7); }
+    .footer__links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer__links a { color: rgba(247,239,226,.85); text-decoration: none; font-family: Georgia, 'Times New Roman', serif; font-size: 14px; }
+    .footer__links a:hover { color: #D9AE56; }
+    .footer__col h5 { margin: 0 0 0.6rem; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #D9AE56; font-family: Verdana, Geneva, sans-serif; }
+    .footer__fine {
+      grid-column: 1 / -1; border-top: 1px solid rgba(247,239,226,.18);
+      padding-top: 1.5rem; font-family: Verdana, Geneva, sans-serif; font-size: 9.5px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(247,239,226,.65); text-align: center;
+    }
+    .footer__fine b { color: #F7EFE2; }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+
+    /* ---------- Identidad visual final (mejorada con fondos) ---------- */
+    .brand-sheet {
+      margin: 3rem auto 1rem; max-width: 1100px; padding: 36px 20px;
+      background: #F4EDE1; border: 1px solid rgba(43,24,16,.16);
+      border-radius: 24px; box-shadow: 0 24px 60px rgba(43,24,16,.12);
+      color: #2B1810; font-family: Georgia, 'Times New Roman', serif;
+      overflow: hidden;
+      position: relative;
+    }
+    .brand-sheet__bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(rgba(244,237,225,.85), rgba(244,237,225,.75)), url('assets/img/fondo-interior.jpg');
+      background-size: cover; background-position: center;
+      opacity: .35; pointer-events: none;
+    }
+    .brand-sheet__header {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 20px; border-bottom: 1px solid rgba(43,24,16,.14); gap: 16px;
+    }
+    .brand-sheet__logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand-sheet__eyebrow {
+      font-family: Verdana, Geneva, sans-serif; font-size: 11px; letter-spacing: 5px;
+      text-transform: uppercase; color: #A9741F; margin: 0 0 6px; font-weight: 700;
+    }
+    .brand-sheet__h1 {
+      margin: 0; font-size: 44px; line-height: 1; letter-spacing: 7px;
+      font-weight: 800; color: #2B1810;
+    }
+    .brand-sheet__sub {
+      margin-top: 8px; font-family: Verdana, Geneva, sans-serif; font-size: 11px;
+      letter-spacing: 3px; text-transform: uppercase; color: #6B4A33;
+    }
+    .brand-sheet__logo-img { width: 80px; height: 80px; display: block; }
+
+    .brand-sheet__grid {
+      position: relative; z-index: 2;
+      display: grid; gap: 20px; margin-top: 24px;
+    }
+    @media (min-width: 64rem) {
+      .brand-sheet__grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .brand-card {
+      border-radius: 18px; overflow: hidden; border: 1px solid rgba(43,24,16,.12);
+      background: #fff; display: flex; flex-direction: column;
+      box-shadow: 0 12px 32px rgba(43,24,16,.10);
+      position: relative;
+    }
+    .brand-card::before {
+      content: "";
+      position: absolute; inset: 0 0 40% 0;
+      background: linear-gradient(to bottom, rgba(232,70,31,.06), transparent);
+      pointer-events: none;
+    }
+    .brand-card__media {
+      aspect-ratio: 1; background: #1B100A; display: grid; place-items: center;
+      overflow: hidden;
+    }
+    .brand-card__media img { width: 78%; height: 78%; object-fit: contain; display: block; }
+    .brand-card__body { padding: 1.25rem; }
+    .brand-card__tag {
+      font-family: Verdana, Geneva, sans-serif; font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; color: #E8461F; font-weight: 700; margin: 0 0 0.5rem; display: block;
+    }
+    .brand-card__title { margin: 0 0 0.5rem; font-size: 1.15rem; color: #1B100A; font-weight: 800; letter-spacing: 0.3px; }
+    .brand-card__desc { margin: 0; font-size: 0.92rem; color: #4A3428; line-height: 1.6; }
+
+    .brand-palette {
+      position: relative; z-index: 2;
+      border-top: 1px solid rgba(43,24,16,.12); padding-top: 20px; margin-top: 24px;
+    }
+    .brand-palette__bg {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(232,70,31,.10), transparent 60%);
+      pointer-events: none;
+    }
+    .brand-palette__head {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    }
+    .brand-palette__title {
+      font-family: Verdana, Geneva, sans-serif; font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: #A9741F; font-weight: 700; margin: 0;
+    }
+    .brand-palette__swatches { position: relative; z-index: 2; display: flex; gap: 14px; flex-wrap: wrap; }
+    .brand-swatch { width: 64px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .brand-chip {
+      width: 52px; height: 52px; border-radius: 12px; display: block;
+      box-shadow: inset 0 0 0 1px rgba(43,24,16,.10), 0 4px 12px rgba(0,0,0,.08);
+    }
+    .brand-swatch b {
+      font-family: Verdana, Geneva, sans-serif; font-size: 11px; font-weight: 800;
+      color: #3A2115; letter-spacing: 1px;
+    }
+    .brand-swatch small {
+      font-family: Consolas, 'Courier New', monospace; font-size: 9.5px;
+      color: #7A5A42; letter-spacing: .3px;
+    }
+
+    .brand-typo {
+      position: relative; z-index: 2;
+      margin-top: 24px; border-top: 1px solid rgba(43,24,16,.12);
+      padding-top: 20px;
+    }
+    .brand-typo__title {
+      font-family: Verdana, Geneva, sans-serif; font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: #A9741F; font-weight: 700; margin: 0 0 12px;
+    }
+    .brand-typo__sample {
+      font-family: Georgia, 'Times New Roman', serif; font-size: 28px;
+      font-weight: 800; color: #1B100A; letter-spacing: 2px; margin: 0 0 0.25rem;
+    }
+    .brand-typo__sample--sub {
+      font-family: Verdana, Geneva, sans-serif; font-size: 13px;
+      letter-spacing: 3px; text-transform: uppercase; color: #6B4A33; margin: 0;
+    }
+
+    .brand-sheet__footer {
+      position: relative; z-index: 2;
+      margin-top: 28px; border-top: 1px solid rgba(43,24,16,.14);
+      padding-top: 16px; display: flex; flex-direction: column; gap: 8px;
+      font-family: Verdana, Geneva, sans-serif; font-size: 9.5px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #7A5A42; text-align: center;
+    }
+    .brand-sheet__footer b { color: #3A2115; font-weight: 800; }
+
+    /* Diálogo de confirmación */
+    dialog {
+      border: 1px solid rgba(43,24,16,.12);
+      border-radius: 16px; padding: 0; background: #fff;
+      color: #2B1810; box-shadow: 0 24px 60px rgba(43,24,16,.20);
+      max-width: 420px; width: min(92vw, 420px);
+    }
+    dialog::backdrop { background: rgba(27,16,10,.5); backdrop-filter: blur(4px); }
+    dialog[open] { animation: none; }
+
+    .confirm__header {
+      text-align: center; padding: 2rem 1.5rem 1rem;
+    }
+    .confirm__icon {
+      width: 64px; height: 64px; border-radius: 50%; background: #EDE0CB;
+      color: #E8461F; display: grid; place-items: center; font-size: 2rem;
+      margin: 0 auto 1rem;
+    }
+    .confirm__title { margin: 0 0 0.5rem; font-size: 1.5rem; color: #1B100A; font-weight: 800; }
+    .confirm__subtitle { margin: 0; color: #6B4A33; font-size: 0.95rem; }
+    .confirm__body { padding: 0 1.5rem 1rem; }
+    .confirm__row {
+      display: flex; justify-content: space-between; padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(43,24,16,.08); font-size: 0.95rem;
+    }
+    .confirm__row .label { color: #4A3428; }
+    .confirm__row .value { font-weight: 800; color: #1B100A; }
+    .confirm__actions {
+      display: flex; gap: 0.75rem; padding: 1rem 1.5rem 1.5rem;
+    }
+    .confirm__actions .btn { flex: 1; justify-content: center; }
+
+    .toast-region { position: fixed; right: 1rem; bottom: 6rem; z-index: 100; display: flex; flex-direction: column; gap: 0.6rem; pointer-events: none; }
+    .toast { pointer-events: auto; background: #1B100A; color: #F7EFE2; padding: 0.9rem 1.2rem;
+      border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.25); font-size: 0.95rem;
+      display: flex; align-items: center; gap: 0.75rem; transform: translateY(20px);
+      opacity: 0; transition: transform .3s ease, opacity .3s ease;
+    }
+    .toast.is-visible { transform: translateY(0); opacity: 1; }
+    .toast__action { background: transparent; border: 1px solid rgba(247,239,226,.5);
+      color: #F7EFE2; border-radius: 6px; padding: 0.25rem 0.7rem; font-size: 0.85rem;
+      cursor: pointer; font-family: inherit;
+    }
+    .toast__action:hover { background: rgba(247,239,226,.15); }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <div class="header__inner">
+      <a class="header__brand" href="#inicio" aria-label="El Rico Sazón, ir al inicio">
+        <img class="header__logo" src="logo.svg" alt="" width="44" height="44">
+        <div class="header__name-group">
+          <div class="eyebrow">Restaurante</div>
+          <h1>EL RICO SAZÓN</h1>
+          <p class="sub">Cocina con sazón</p>
+        </div>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Abrir menú de navegación">
+        <span class="nav-toggle__bars"><span></span><span></span><span></span></span>
+      </button>
+      <nav class="nav" id="nav-principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#inicio">Inicio</a></li>
+          <li><a class="nav__link" href="#carta">La carta</a></li>
+          <li><a class="nav__link" href="#nosotros">Nosotros</a></li>
+          <li><a class="nav__link" href="#reservar">Reservar mesa</a></li>
+          <li><a class="nav__link" href="#contacto">Contacto</a></li>
+          <li class="nav__cta"><a class="btn btn--primary" href="#reservar">Reservar mesa</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- Hero con fondo especial -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__bg"></div>
+      <div class="hero__content">
+        <p class="hero__kicker">El sabor que reúne a la familia</p>
+        <h2 id="hero-title">El Rico Sazón · Cocina con alma</h2>
+        <p>Recetas tradicionales hechas a fuego lento, productos del mercado y el calor de nuestra brasa de leña. Ven a probar el verdadero sazón.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#carta">Ver la carta</a>
+          <a class="btn btn--ghost" href="#reservar">Reservar mesa</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Horno / Brasa (especialidad) -->
+    <section class="horno" id="horno" aria-labelledby="horno-title">
+      <div class="horno__bg"></div>
+      <div class="horno__deco"></div>
+      <div class="container">
+        <div class="horno__grid">
+          <div class="horno__media">
+            <img src="assets/img/fondo-chef.jpg" alt="Horno de brasa y leña del restaurante">
+            <span class="horno__badge">Horno de leña</span>
+          </div>
+          <div>
+            <h2 id="horno-title">Nuestra brasa, tu sazón</h2>
+            <p>Cocinamos sobre horno de leña y brasa de encina, ese fuego lento que sella el sabor y deja un aroma inconfundible en cada plato.</p>
+            <ul class="horno__list">
+              <li>Leña de encina seleccionada para el horno.</li>
+              <li>Cocción lenta que resalta cada ingrediente.</li>
+              <li>Temperatura controlada punto por punto.</li>
+              <li>Sabor ahumado y auténtico en cada bocado.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carta con más platos -->
+    <section class="carta" id="carta" aria-labelledby="carta-title">
+      <div class="carta__deco"></div>
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">La carta</p>
+          <h2 id="carta-title">Platos con sazón</h2>
+          <p>Cada plato se prepara al momento, con brasa y paciencia, para llevar el sabor de casa a tu mesa.</p>
+        </div>
+        <div class="carta__grid">
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/plato-principal.jpg" alt="Bandeja paisa">
+              <span class="card__badge">Principal</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Bandeja paisa</h3>
+              <p class="card__desc">Frijoles, arroz, carne molida, chicharrón, huevo, aguacate, plátano y arepa.</p>
+              <div class="card__footer">
+                <span class="card__price">24.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/sopa.jpg" alt="Ajiaco bogotano">
+              <span class="card__badge">Sopa</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Ajiaco bogotano</h3>
+              <p class="card__desc">Sopa de tres papas, pollo, maíz, guasca, alcaparras y crema de leche.</p>
+              <div class="card__footer">
+                <span class="card__price">18.900<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/guiso.jpg" alt="Sancocho de gallina">
+              <span class="card__badge">Principal</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Sancocho de gallina</h3>
+              <p class="card__desc">Gallina de patio, yuca, plátano, maíz, yuca criolla y cilantro.</p>
+              <div class="card__footer">
+                <span class="card__price">22.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/entrada.jpg" alt="Arepa de huevo">
+              <span class="card__badge">Entrada</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Arepa de huevo</h3>
+              <p class="card__desc">Arepa frita rellena de huevo, crujiente por fuera y suave por dentro.</p>
+              <div class="card__footer">
+                <span class="card__price">6.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/arroz.jpg" alt="Lechona tolimense">
+              <span class="card__badge">Principal</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Lechona tolimense</h3>
+              <p class="card__desc">Cerdo asado relleno de arroz, guisantes y especias, con arepa y hogao.</p>
+              <div class="card__footer">
+                <span class="card__price">26.000<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/postre.jpg" alt="Natilla con brevas">
+              <span class="card__badge">Postre</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Natilla con brevas</h3>
+              <p class="card__desc">Natilla tradicional con arequipe y brevas en almíbar.</p>
+              <div class="card__footer">
+                <span class="card__price">9.000<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/ensalada-burrata.jpg" alt="Ensalada de burrata">
+              <span class="card__badge">Entrada</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Ensalada de burrata</h3>
+              <p class="card__desc">Burrata cremosa, tomate cherry, rúcula y aceite de oliva virgen.</p>
+              <div class="card__footer">
+                <span class="card__price">14.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/carpaccio.jpg" alt="Carpaccio de remolacha">
+              <span class="card__badge">Entrada</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Carpaccio de remolacha</h3>
+              <p class="card__desc">Remolacha fina, queso de cabra, nueces tostadas y vinagreta de miel.</p>
+              <div class="card__footer">
+                <span class="card__price">13.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/cordero.jpg" alt="Cordero confitado">
+              <span class="card__badge">Principal</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Cordero confitado</h3>
+              <p class="card__desc">Cordero al romero con puré de papa y reducción de vino tinto.</p>
+              <div class="card__footer">
+                <span class="card__price">28.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/pizza.jpg" alt="Pizza de masa madre">
+              <span class="card__badge">Principal</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Pizza de masa madre</h3>
+              <p class="card__desc">Masa fermentada 48h, mozzarella, tomate, albahaca y aceite de oliva.</p>
+              <div class="card__footer">
+                <span class="card__price">19.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/risotto.jpg" alt="Risotto de setas">
+              <span class="card__badge">Principal</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Risotto de setas</h3>
+              <p class="card__desc">Arborio, setas variadas, queso parmesano y mantequilla de trufa.</p>
+              <div class="card__footer">
+                <span class="card__price">21.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/vino.jpg" alt="Vino tinto de la casa">
+              <span class="card__badge">Bebida</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Vino tinto de la casa</h3>
+              <p class="card__desc">Copa de vino tinto reserva, ideal para acompañar carnes a la brasa.</p>
+              <div class="card__footer">
+                <span class="card__price">8.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__media">
+              <img src="assets/img/cafe.jpg" alt="Café de especialidad">
+              <span class="card__badge">Bebida</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Café de especialidad</h3>
+              <p class="card__desc">Café de origen colombiano, preparaciones espresso y filtrado.</p>
+              <div class="card__footer">
+                <span class="card__price">5.500<span> COP</span></span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="detalle__galeria">
+          <div class="detalle__item"><img src="assets/img/detalle-1.jpg" alt="Detalle de plato 1"></div>
+          <div class="detalle__item"><img src="assets/img/detalle-2.jpg" alt="Detalle de plato 2"></div>
+          <div class="detalle__item"><img src="assets/img/detalle-3.jpg" alt="Detalle de plato 3"></div>
+          <div class="detalle__item"><img src="assets/img/detalle-4.jpg" alt="Detalle de plato 4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nosotros -->
+    <section class="nosotros" id="nosotros" aria-labelledby="nosotros-title">
+      <div class="nosotros__deco"></div>
+      <div class="container">
+        <div class="nosotros__grid">
+          <div class="nosotros__media">
+            <img src="assets/img/ambiente.jpg" alt="Interior del restaurante El Rico Sazón">
+          </div>
+          <div>
+            <h3 id="nosotros-title">Nuestra historia</h3>
+            <p>El Rico Sazón nace de la idea de cocinar lo que la tierra nos da, con respeto y sin prisa. Años después seguimos encendiendo la brasa cada mañana para que tu mesa sea un encuentro.</p>
+            <p>No creemos en los platos de escaparate. Creemos en el sabor que se queda, en el pan que fermente despacio y en un servicio que recuerda tu nombre.</p>
+            <ul>
+              <li>Producto de mercado, bajo a menos de 60 km.</li>
+              <li>Cocción a fuego lento y brasa de leña.</li>
+              <li>Recetas transmitidas de generación en generación.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reservas con carrito -->
+    <section class="reservas" id="reservar" aria-labelledby="reservar-title">
+      <div class="reservas__deco"></div>
+      <div class="container">
+        <div class="reservas__grid">
+          <div class="reservas__info">
+            <p class="kicker">Reservar</p>
+            <h2 id="reservar-title">Reserva tu mesa</h2>
+            <p>Reserva con anticipación para asegurar tu lugar junto al horno. Nuestro equipo preparará todo para que tu visita sea inolvidable.</p>
+            <div class="reserva__detalle">
+              <h3>Detalles de tu reserva</h3>
+              <p>Reserva en menos de un minuto. Si vienes por primera vez, cuéntanos si celebras algo.</p>
+              <ul>
+                <li><span class="detalle__icon">📅</span><strong>Horario:</span> Mar a Dom, 12:00 – 23:00 (lunes cerrado)</li>
+                <li><span class="detalle__icon">👥</span><strong>Capacidad:</span> hasta 12 personas por mesa</li>
+                <li><span class="detalle__icon">📍</span><strong>Ubicación:</span> Calle del Sazón 24 · Centro</li>
+                <li><span class="detalle__icon">📞</span><strong>Confirmación:</span> te escribemos al correo tras reservar</li>
+              </ul>
+            </div>
+          </div>
+          <div class="reserva__detalle">
+            <form class="form" novalidate id="form-reserva">
+              <div class="form__head">
+                <div class="kicker">Formulario</div>
+                <h3>Tu reserva en 3 pasos</h3>
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <label for="res-name">Nombre y apellidos <span aria-hidden="true">*</span></label>
+                  <input type="text" id="res-name" name="name" autocomplete="name" required minlength="2" aria-describedby="error-res-name">
+                  <p class="field__error" id="error-res-name" hidden>Escribe tu nombre completo.</p>
+                </div>
+                <div class="field">
+                  <label for="res-email">Correo electrónico <span aria-hidden="true">*</span></label>
+                  <input type="email" id="res-email" name="email" autocomplete="email" inputmode="email" required aria-describedby="error-res-email">
+                  <p class="field__error" id="error-res-email" hidden>Escribe un correo válido.</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <label for="res-phone">Teléfono <span aria-hidden="true">*</span></label>
+                  <input type="tel" id="res-phone" name="phone" autocomplete="tel" inputmode="tel" required pattern="[0-9\s\+\-]{7,20}" aria-describedby="error-res-phone">
+                  <p class="field__error" id="error-res-phone" hidden>Escribe un teléfono válido.</p>
+                </div>
+                <div class="field">
+                  <label for="res-date">Fecha <span aria-hidden="true">*</span></label>
+                  <input type="date" id="res-date" name="date" required aria-describedby="error-res-date">
+                  <p class="field__error" id="error-res-date" hidden>Elige una fecha válida.</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <label for="res-time">Hora <span aria-hidden="true">*</span></label>
+                  <select id="res-time" name="time" required aria-describedby="error-res-time">
+                    <option value="">Selecciona una hora</option>
+                  </select>
+                  <p class="field__error" id="error-res-time" hidden>Elige una hora disponible.</p>
+                </div>
+                <div class="field">
+                  <label for="res-guests">Personas <span aria-hidden="true">*</span></label>
+                  <select id="res-guests" name="guests" required aria-describedby="error-res-guests">
+                    <option value="">Selecciona cuántos venís</option>
+                    <option value="2">2 personas</option>
+                    <option value="3">3 personas</option>
+                    <option value="4">4 personas</option>
+                    <option value="5">5 personas</option>
+                    <option value="6">6 personas</option>
+                    <option value="8">8 personas</option>
+                    <option value="10">10 personas</option>
+                    <option value="12">12 personas</option>
+                  </select>
+                  <p class="field__error" id="error-res-guests" hidden>Indica cuántas personas venís.</p>
+                </div>
+              </div>
+
+              <div class="field field--full">
+                <label for="res-occasion">Ocasión (opcional)</label>
+                <select id="res-occasion" name="occasion">
+                  <option value="">Ninguna en especial</option>
+                  <option value="Cumpleaños">Cumpleaños</option>
+                  <option value="Aniversario">Aniversario</option>
+                  <option value="Cena romántica">Cena romántica</option>
+                  <option value="Comida familiar">Comida familiar</option>
+                  <option value="Cena de empresa">Cena de empresa</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+
+              <div class="field field--full">
+                <label for="res-notes">Notas especiales (opcional)</label>
+                <textarea id="res-notes" name="notes" rows="3" maxlength="300" aria-describedby="notes-hint" placeholder="Alergias, trona, accesibilidad, mascota en terraza…"></textarea>
+                <p class="field__hint" id="notes-hint">Máximo 300 caracteres <span data-notes-count>0</span>/300</p>
+              </div>
+
+              <div class="form__actions">
+                <button type="button" class="btn btn--ghost" id="btn-limpiar">Limpiar</button>
+                <button class="btn btn--primary btn--cart-block" type="button" id="btn-add-reserva">Agregar a mi reserva</button>
+              </div>
+              <p class="form__small" style="margin-top:1rem; text-align:center; font-size:.85rem; color:#6B4A33;">Demo: la reserva se valida en el navegador y se guarda en tu carrito de reservas.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contacto" id="contacto" aria-labelledby="contacto-title">
+      <div class="container">
+        <div class="contacto__grid">
+          <div>
+            <p class="kicker">Contacto</p>
+            <h2 id="contacto-title">Nos encontrarás en el centro</h2>
+            <p>A cinco minutos de la plaza principal. Si vienes en bici, hay aparcabicis justo enfrente.</p>
+            <div class="contact__card">
+              <span class="contact__icon" aria-hidden="true">📍</span>
+              <div class="contact__body">
+                <h4>Dónde estamos</h4>
+                <p>Calle del Sazón 24 · Centro</p>
+              </div>
+            </div>
+            <div class="contact__card">
+              <span class="contact__icon" aria-hidden="true">📞</span>
+              <div class="contact__body">
+                <h4>Llámanos</h4>
+                <p><a href="tel:+573001234567">+57 300 123 4567</a></p>
+              </div>
+            </div>
+            <div class="contact__card">
+              <span class="contact__icon" aria-hidden="true">✉️</span>
+              <div class="contact__body">
+                <h4>Escríbenos</h4>
+                <p><a href="mailto:hola@elricosazon.com">hola@elricosazon.com</a></p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="kicker">Síguenos</p>
+            <h2>Redes sociales</h2>
+            <p>Descubre nuestros platos del día y promociones.</p>
+            <div style="display:flex; gap:1rem;">
+              <a href="#" class="btn btn--ghost" style="padding:.5rem; font-size:1.4rem;">📷</a>
+              <a href="#" class="btn btn--ghost" style="padding:.5rem; font-size:1.4rem;">📘</a>
+              <a href="#" class="btn btn--ghost" style="padding:.5rem; font-size:1.4rem;">🐦</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Carrito de reservas flotante -->
+  <div class="reserva-cart__overlay" id="reserva-cart-overlay"></div>
+  <div class="reserva-cart" id="reserva-cart">
+    <div class="reserva-cart__header">
+      <h3>Mi reserva</h3>
+      <button class="reserva-cart__close" id="btn-cart-close" aria-label="Cerrar carrito de reservas">✕</button>
+    </div>
+    <div class="reserva-cart__body" id="reserva-cart-body">
+      <div class="reserva-cart__empty" id="reserva-cart-empty">
+        <span class="icon">🍽️</span>
+        <h4>Tu reserva está vacía</h4>
+        <p>Completa el formulario y agrega tu reserva aquí.</p>
+      </div>
+      <div id="reserva-cart-items"></div>
+    </div>
+    <div class="reserva-cart__footer">
+      <div class="reserva-cart__total">
+        <span>Total de reservas</span>
+        <span id="reserva-cart-count">0</span>
+      </div>
+      <button class="btn btn--primary btn--cart-block" id="btn-cart-confirm">Confirmar reserva</button>
+      <button class="btn btn--outline btn--cart-block" id="btn-cart-clear">Vaciar reserva</button>
+    </div>
+  </div>
+
+  <!-- Botón flotante del carrito -->
+  <button class="cart-fab" id="btn-cart-fab" aria-label="Abrir carrito de reservas">
+    🍽️
+    <span class="badge" id="cart-badge" hidden>0</span>
+  </button>
+
+  <footer class="site-footer">
+    <div class="footer__inner">
+      <a class="footer__brand" href="#inicio" aria-label="El Rico Sazón, ir al inicio">
+        <img class="footer__logo" src="logo.svg" alt="" width="38" height="38">
+        <div class="footer__name-group">
+          <div class="eyebrow">Restaurante</div>
+          <h2>EL RICO SAZÓN</h2>
+          <p>Cocina con sazón</p>
+        </div>
+      </a>
+      <ul class="footer__links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#carta">La carta</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#reservar">Reservar mesa</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="footer__col">
+        <h5>Visítanos</h5>
+        <p style="margin:0 0 0.4rem; font-family:Georgia,'Times New Roman',serif; font-size:14px; color:#F7EFE2;">Calle del Sazón 24 · Centro</p>
+        <p style="margin:0; font-family:Georgia,'Times New Roman',serif; font-size:14px; color:#F7EFE2;">Mar – Dom · consulta horarios</p>
+      </div>
+      <p class="footer__fine">
+        <b>Archivos</b> logo.svg · logo-1600.png · logo-horizontal.svg · logo-horizontal-claro.svg · favicon.svg &nbsp;|&nbsp;
+        El Rico Sazón · 2026 &nbsp;|&nbsp;
+        <b>Desarrollado por León Villalta Jesús</b>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Identidad visual final (mejorada con fondos) -->
+  <section class="brand-sheet" aria-labelledby="brand-title">
+    <div class="brand-sheet__bg"></div>
+    <div class="brand-sheet__header">
+      <div class="brand-sheet__logo-text">
+        <div class="brand-sheet__eyebrow">Identidad visual</div>
+        <h1 id="brand-title">EL RICO SAZÓN</h1>
+        <p class="brand-sheet__sub">Restaurante · Cocina con sazón</p>
+      </div>
+      <img class="brand-sheet__logo-img" src="logo.svg" alt="Marca El Rico Sazón">
+    </div>
+
+    <div class="brand-sheet__grid">
+      <article class="brand-card">
+        <div class="brand-card__media">
+          <img src="logo.svg" alt="Logotipo principal El Rico Sazón">
+        </div>
+        <div class="brand-card__body">
+          <span class="brand-card__tag">Logotipo principal</span>
+          <h3 class="brand-card__title">Sello circular</h3>
+          <p class="brand-card__desc">Versión maestra con llama, cubiertos cruzados y tipografía en arco. Fondo transparente.</p>
+        </div>
+      </article>
+      <article class="brand-card">
+        <div class="brand-card__media">
+          <img src="logo-horizontal.svg" alt="Versión horizontal para fondos oscuros">
+        </div>
+        <div class="brand-card__body">
+          <span class="brand-card__tag">Horizontal · fondo oscuro</span>
+          <h3 class="brand-card__title">Letrero dorado</h3>
+          <p class="brand-card__desc">Ideal para letreros, redes sociales y empaques sobre fondos oscuros.</p>
+        </div>
+      </article>
+      <article class="brand-card">
+        <div class="brand-card__media">
+          <img src="logo-horizontal-claro.svg" alt="Versión horizontal para fondos claros">
+        </div>
+        <div class="brand-card__body">
+          <span class="brand-card__tag">Horizontal · fondo claro</span>
+          <h3 class="brand-card__title">Versión clara</h3>
+          <p class="brand-card__desc">Optimizada para menús, papelería y facturas sobre fondos claros.</p>
+        </div>
+      </article>
+      <article class="brand-card">
+        <div class="brand-card__media">
+          <img src="favicon.svg" alt="Favicon El Rico Sazón">
+        </div>
+        <div class="brand-card__body">
+          <span class="brand-card__tag">Favicon</span>
+          <h3 class="brand-card__title">Pestaña del navegador</h3>
+          <p class="brand-card__desc">Icono compacto que identifica a El Rico Sazón en la pestaña del navegador.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="brand-palette">
+      <div class="brand-palette__bg"></div>
+      <div class="brand-palette__head">
+        <h2 class="brand-palette__title">Paleta de colores</h2>
+      </div>
+      <div class="brand-palette__swatches">
+        <div class="brand-swatch">
+          <span class="brand-chip" style="background:#1B100A"></span>
+          <b>Espresso</b><small>#1B100A</small>
+        </div>
+        <div class="brand-swatch">
+          <span class="brand-chip" style="background:#D9AE56"></span>
+          <b>Oro sazón</b><small>#D9AE56</small>
+        </div>
+        <div class="brand-swatch">
+          <span class="brand-chip" style="background:#E8461F"></span>
+          <b>Brasa</b><small>#E8461F</small>
+        </div>
+        <div class="brand-swatch">
+          <span class="brand-chip" style="background:#F7EFE2"></span>
+          <b>Crema</b><small>#F7EFE2</small>
+        </div>
+        <div class="brand-swatch">
+          <span class="brand-chip" style="background:#6B3F22"></span>
+          <b>Nogal</b><small>#6B3F22</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-typo">
+      <h2 class="brand-typo__title">Tipografía principal</h2>
+      <p class="brand-typo__sample">EL RICO SAZÓN</p>
+      <p class="brand-typo__sample--sub">Georgia · serif · pesos 700 y 800</p>
+    </div>
+
+    <div class="brand-sheet__footer">
+      <div><b>Archivos</b> logo.svg · logo-1600.png · logo-horizontal.svg · logo-horizontal-claro.svg · favicon.svg</div>
+      <div>El Rico Sazón · 2026</div>
+      <div><b>Desarrollado por León Villalta Jesús</b></div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---------- Menú móvil ---------- */
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('nav-principal');
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!open));
+          toggle.setAttribute('aria-label', open ? 'Abrir menú de navegación' : 'Cerrar menú de navegación');
+          nav.hidden = open;
+        });
+        nav.querySelectorAll('.nav__link').forEach((link) => {
+          link.addEventListener('click', () => {
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Abrir menú de navegación');
+            nav.hidden = true;
+          });
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Abrir menú de navegación');
+            nav.hidden = true;
+          }
+        });
+      }
+
+      /* ---------- Horas del select de reserva ---------- */
+      const timeSelect = document.getElementById('res-time');
+      if (timeSelect) {
+        const slots = [
+          '12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30',
+          '19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30'
+        ];
+        slots.forEach((slot) => {
+          const option = document.createElement('option');
+          option.value = slot;
+          option.textContent = slot;
+          timeSelect.append(option);
+        });
+      }
+
+      /* ---------- Contador de notas ---------- */
+      const notesInput = document.getElementById('res-notes');
+      const notesCount = document.querySelector('[data-notes-count]');
+      if (notesInput && notesCount) {
+        notesInput.addEventListener('input', () => {
+          notesCount.textContent = notesInput.value.length;
+        });
+      }
+
+      /* ---------- Fecha mínima (hoy) ---------- */
+      const dateInput = document.getElementById('res-date');
+      if (dateInput) {
+        const hoy = new Date();
+        hoy.setHours(0,0,0,0);
+        dateInput.min = hoy.toISOString().split('T')[0];
+      }
+
+      /* ---------- Carrito de reservas ---------- */
+      const CART_KEY = 'elricosazon:reservas';
+      const cartOverlay = document.getElementById('reserva-cart-overlay');
+      const cartPanel = document.getElementById('reserva-cart');
+      const cartBtnOpen = document.getElementById('btn-cart-fab');
+      const cartBtnClose = document.getElementById('btn-cart-close');
+      const cartItemsContainer = document.getElementById('reserva-cart-items');
+      const cartEmpty = document.getElementById('reserva-cart-empty');
+      const cartCountBadge = document.getElementById('cart-badge');
+      const cartCountFooter = document.getElementById('reserva-cart-count');
+      const cartConfirmBtn = document.getElementById('btn-cart-confirm');
+      const cartClearBtn = document.getElementById('btn-cart-clear');
+
+      let reservas = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      if (!Array.isArray(reservas)) reservas = [];
+
+      function saveCart() {
+        try { localStorage.setItem(CART_KEY, JSON.stringify(reservas)); } catch (e) {}
+        renderCart();
+        updateFab();
+      }
+
+      function updateFab() {
+        const total = reservas.reduce((acc, r) => acc + Number(r.guests || 0), 0);
+        cartCountBadge.hidden = reservas.length === 0;
+        cartCountBadge.textContent = reservas.length;
+        cartCountFooter.textContent = reservas.length;
+        cartBtnOpen.style.display = reservas.length ? 'grid' : 'none';
+      }
+
+      function renderCart() {
+        cartItemsContainer.innerHTML = '';
+        if (reservas.length === 0) {
+          cartEmpty.hidden = false;
+          cartConfirmBtn.disabled = true;
+          cartClearBtn.hidden = true;
+          return;
+        }
+        cartEmpty.hidden = true;
+        cartConfirmBtn.disabled = false;
+        cartClearBtn.hidden = false;
+        reservas.forEach((r, index) => {
+          const item = document.createElement('div');
+          item.className = 'reserva-cart__item';
+          item.innerHTML = `
+            <h4>Reserva #${index + 1}</h4>
+            <p><strong>Fecha:</strong> ${r.date}</p>
+            <p><strong>Hora:</strong> ${r.time} h</p>
+            <p><strong>Personas:</strong> ${r.guests}</p>
+            ${r.occasion ? `<p><strong>Ocasión:</strong> ${r.occasion}</p>` : ''}
+            ${r.notes ? `<p><strong>Notas:</strong> ${r.notes}</p>` : ''}
+            <span class="tag">PENDIENTE</span>
+          `;
+          cartItemsContainer.appendChild(item);
+        });
+      }
+
+      function openCart() {
+        document.body.classList.add('reserva-cart-open');
+      }
+      function closeCart() {
+        document.body.classList.remove('reserva-cart-open');
+      }
+
+      cartBtnOpen.addEventListener('click', openCart);
+      cartOverlay.addEventListener('click', closeCart);
+      cartBtnClose.addEventListener('click', closeCart);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('reserva-cart-open')) closeCart();
+      });
+
+      /* Agregar reserva al carrito */
+      const btnAdd = document.getElementById('btn-add-reserva');
+      if (btnAdd) {
+        btnAdd.addEventListener('click', () => {
+          const name = document.getElementById('res-name').value.trim();
+          const email = document.getElementById('res-email').value.trim();
+          const phone = document.getElementById('res-phone').value.trim();
+          const date = document.getElementById('res-date').value;
+          const time = document.getElementById('res-time').value;
+          const guests = document.getElementById('res-guests').value;
+          const occasion = document.getElementById('res-occasion').value;
+          const notes = document.getElementById('res-notes').value.trim();
+
+          if (!name || !email || !phone || !date || !time || !guests) {
+            document.getElementById('form-reserva').requestSubmit();
+            return;
+          }
+
+          const reserva = { name, email, phone, date, time, guests: Number(guests), occasion, notes, createdAt: new Date().toISOString() };
+          reservas.push(reserva);
+          saveCart();
+          openCart();
+
+          showToast('Reserva añadida al carrito', 'Ver reserva', openCart);
+        });
+      }
+
+      /* Confirmar reserva */
+      cartConfirmBtn.addEventListener('click', () => {
+        if (reservas.length === 0) return;
+        const code = 'RS-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+        const dialog = document.createElement('dialog');
+        dialog.className = 'confirm-dialog';
+        const rows = reservas.map((r, i) => `
+          <div class="confirm__row">
+            <span class="label">Reserva ${i + 1}</span>
+            <span class="value">${r.date} · ${r.time} h · ${r.guests} pers.</span>
+          </div>
+        `).join('');
+        dialog.innerHTML = `
+          <div class="confirm__header">
+            <div class="confirm__icon">✅</div>
+            <h2 class="confirm__title">Reserva confirmada</h2>
+            <p class="confirm__subtitle">Código: <strong>${code}</strong></p>
+          </div>
+          <div class="confirm__body">
+            ${rows}
+          </div>
+          <div class="confirm__actions">
+            <button class="btn btn--outline" type="button">Cerrar</button>
+            <button class="btn btn--primary" type="button">Descargar ICS</button>
+          </div>
+        `;
+        document.body.appendChild(dialog);
+        dialog.showModal();
+
+        dialog.querySelector('.btn--outline').addEventListener('click', () => dialog.close());
+        dialog.querySelector('.btn--primary').addEventListener('click', () => {
+          const start = new Date(reservas[0].date + 'T' + reservas[0].time + ':00');
+          const end = new Date(start.getTime() + 90 * 60000);
+          const pad = (n) => String(n).padStart(2, '0');
+          const toISO = (d) => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00';
+          const lines = [
+            'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//El Rico Sazón//Reservas//ES',
+            'BEGIN:VEVENT', 'UID:' + code + '@elricosazon.local', 'DTSTAMP:' + toISO(new Date()),
+            'DTSTART:' + toISO(start), 'DTEND:' + toISO(end),
+            'SUMMARY:Reserva en El Rico Sazón (' + reservas[0].guests + ' personas)',
+            'LOCATION:Calle del Sazón 24 · Centro',
+            'DESCRIPTION:Código: ' + code,
+            'END:VEVENT', 'END:VCALENDAR'
+          ];
+          const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url; a.download = 'reserva-el-ricosazon.ics';
+          document.body.append(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+          showToast('Reserva descargada a tu calendario');
+        });
+        dialog.addEventListener('close', () => {
+          reservas = [];
+          saveCart();
+          dialog.remove();
+        });
+      });
+
+      /* Vaciar carrito */
+      cartClearBtn.addEventListener('click', () => {
+        if (!reservas.length) return;
+        reservas = [];
+        saveCart();
+        showToast('Reserva vaciada');
+      });
+
+      /* ---------- Toast ---------- */
+      const toastRegion = document.createElement('div');
+      toastRegion.className = 'toast-region';
+      document.body.appendChild(toastRegion);
+
+      function showToast(message, actionLabel, onAction) {
+        if (toastRegion) toastRegion.innerHTML = '';
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        if (actionLabel && typeof onAction === 'function') {
+          const btn = document.createElement('button');
+          btn.className = 'toast__action';
+          btn.textContent = actionLabel;
+          btn.addEventListener('click', () => { onAction(); toast.remove(); });
+          toast.append(btn);
+        }
+        toastRegion.appendChild(toast);
+        requestAnimationFrame(() => toast.classList.add('is-visible'));
+        setTimeout(() => toast.remove(), 4000);
+      }
+
+      /* ---------- Formulario de reserva (validación) ---------- */
+      const form = document.getElementById('form-reserva');
+      if (form) {
+        const fields = [
+          { el: document.getElementById('res-name'), validate: (v) => v.trim().length >= 2 ? '' : 'Escribe tu nombre completo.' },
+          { el: document.getElementById('res-email'), validate: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Escribe un correo electrónico válido.' },
+          { el: document.getElementById('res-phone'), validate: (v) => /^[\d\s\+\-]{7,20}$/.test(v.trim()) ? '' : 'Escribe un teléfono válido.' },
+          { el: document.getElementById('res-date'), validate: (v) => v ? '' : 'Elige una fecha válida.' },
+          { el: document.getElementById('res-time'), validate: (v) => v ? '' : 'Selecciona una hora.' },
+          { el: document.getElementById('res-guests'), validate: (v) => v ? '' : 'Indica cuántas personas venís.' }
+        ].filter((f) => f.el);
+
+        function setError(field, msg) {
+          const err = document.getElementById('error-' + field.el.id);
+          if (err) { err.textContent = msg; err.hidden = !msg; }
+          if (msg) field.el.setAttribute('aria-invalid', 'true'); else field.el.removeAttribute('aria-invalid');
+        }
+        fields.forEach((f) => setError(f, ''));
+
+        form.addEventListener('input', (e) => {
+          const f = fields.find((fd) => fd.el === e.target);
+          if (f && f.el.getAttribute('aria-invalid') === 'true') {
+            const m = f.validate(f.el.value);
+            if (!m) setError(f, '');
+          }
+        });
+
+        const btnLimpiar = document.getElementById('btn-limpiar');
+        if (btnLimpiar) {
+          btnLimpiar.addEventListener('click', () => {
+            form.reset();
+            fields.forEach((f) => setError(f, ''));
+            if (notesCount) notesCount.textContent = '0';
+          });
+        }
+
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          fields.forEach((f) => setError(f, f.validate(f.el.value)));
+          const first = fields.find((f) => {
+            const m = f.validate(f.el.value);
+            setError(f, m);
+            return !!m;
+          });
+          if (first) {
+            first.el.focus({ preventScroll: true });
+            return;
+          }
+          showToast('Formulario listo. Agrega tu reserva al carrito.');
+        });
+      }
+
+      /* Año */
+      document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = String(new Date().getFullYear()); });
+
+      /* Inicializar carrito */
+      updateFab();
+      renderCart();
+    })();
+  </script>
+</body>
+</html>
