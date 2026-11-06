@@ -3,7 +3,7 @@ builder = "docker"
 
 [deploy]
 startCommand = "npm start"
-healthcheckPath = "/presentacion.html"
+healthcheckPath = "/index.html"
 healthcheckTimeout = 120
 restartPolicyType = "always"
 restartPolicyMaxRetries = 10
